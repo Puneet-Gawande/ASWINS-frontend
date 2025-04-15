@@ -3,6 +3,7 @@ import { Pie, Line } from 'react-chartjs-2';
 import API from '../services/api';
 import 'chart.js/auto';
 
+
 const Dashboard = () => {
   const [patients, setPatients] = useState([]);
   const [appointments, setAppointments] = useState([]);

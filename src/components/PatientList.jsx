@@ -5,18 +5,27 @@ import PatientForm from './PatientForm';
 const PatientList = () => {
   const [patients, setPatients] = useState([]);
 
+ 
   const fetchPatients = async () => {
+    try{
     const res = await API.get('/api/patients');
-    setPatients(res.data);
+    setPatients(res.data);}
+    catch(err){  
+      console.error('Error in fetching patient: ', err)
+    }
   };
 
   useEffect(() => {
     fetchPatients();
   }, []);
 
+  const handlePatientAdded = (newPatient) => {
+    setPatients(prev => [...prev, newPatient]); // add new patient to the list immediately
+  };
+
   return (
     <div className="p-6">
-      <PatientForm onPatientAdded={fetchPatients} />
+      <PatientForm onPatientAdded={handlePatientAdded} />
       <h2 className="text-2xl mt-6 mb-2">Patient List</h2>
       <table className="w-full border">
         <thead>

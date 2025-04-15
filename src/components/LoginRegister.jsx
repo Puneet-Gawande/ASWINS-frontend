@@ -1,14 +1,18 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const LoginRegister = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    navigate('./dashboard');
     await login(email, password);
+   
   };
 
   return (
@@ -29,7 +33,7 @@ const LoginRegister = () => {
           onChange={(e) => setPassword(e.target.value)}
           className="w-full p-2 mb-4 border border-gray-300 rounded"
         />
-        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">Login</button>
+        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded" >Login</button>
       </form>
     </div>
   );
